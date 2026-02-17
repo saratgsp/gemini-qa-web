@@ -1,5 +1,7 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
+console.log("Script loaded and ESM import successful.");
+
 const chatHistory = document.getElementById('chat-history');
 const promptInput = document.getElementById('prompt-input');
 const sendBtn = document.getElementById('send-btn');
@@ -12,27 +14,56 @@ const apiKeyInput = document.getElementById('api-key-input');
 let genAI;
 let model;
 
-// --- State Management ---
-// Check for file protocol (ES Modules won't work)
-if (window.location.protocol === 'file:') {
-    alert("Warning: This app uses ES Modules which may not work when opened directly as a file. Please use a local server (e.g., Live Server or python -m http.server).");
+// --- Functions ---
+
+function toggleModal(show) {
+    console.log("toggleModal:", show);
+    if (show) {
+        settingsModal.classList.remove('hidden');
+    } else {
+        settingsModal.classList.add('hidden');
+    }
 }
 
-// Check for API Key on load
-const savedKey = localStorage.getItem('gemini_api_key');
-if (savedKey) {
-    initializeGenAI(savedKey);
-    apiKeyInput.value = savedKey;
-} else {
+function initializeGenAI(key) {
+    console.log("Initializing GenAI...");
+    try {
+        if (!GoogleGenerativeAI) {
+            throw new Error("GoogleGenerativeAI SDK not loaded properly.");
+        }
+        genAI = new GoogleGenerativeAI(key);
+        model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+        console.log("GenAI Model initialized successfully.");
+    } catch (error) {
+        console.error("Error initializing Gemini:", error);
+        addSystemMessage("Error initializing Gemini API. " + error.message);
+    }
+}
+
+// --- State Management ---
+
+try {
+    const savedKey = localStorage.getItem('gemini_api_key');
+    if (savedKey) {
+        console.log("Found saved API key in localStorage.");
+        initializeGenAI(savedKey);
+        apiKeyInput.value = savedKey;
+    } else {
+        console.log("No API key found, showing modal.");
+        toggleModal(true);
+    }
+} catch (e) {
+    console.error("LocalStorage access error:", e);
     toggleModal(true);
 }
 
 // --- Event Listeners ---
-settingsBtn.addEventListener('click', () => toggleModal(true));
-closeModalBtn.addEventListener('click', () => toggleModal(false));
 
-saveKeyBtn.addEventListener('click', () => {
-    console.log("Save Key clicked");
+settingsBtn.onclick = () => toggleModal(true);
+closeModalBtn.onclick = () => toggleModal(false);
+
+saveKeyBtn.onclick = () => {
+    console.log("Save Key Button clicked");
     const key = apiKeyInput.value.trim();
     if (key) {
         try {
@@ -40,15 +71,14 @@ saveKeyBtn.addEventListener('click', () => {
             initializeGenAI(key);
             toggleModal(false);
             addSystemMessage("API Key saved! Ready to chat.");
-            console.log("API Key saved and GenAI initialized");
         } catch (e) {
-            console.error("Save Key Error:", e);
-            alert("Error saving key: " + e.message);
+            console.error("Failed to save key:", e);
+            alert("Storage error: " + e.message + ". Please ensure cookies/storage are enabled.");
         }
     } else {
         alert("Please enter a valid API key.");
     }
-});
+};
 
 sendBtn.addEventListener('click', sendMessage);
 
