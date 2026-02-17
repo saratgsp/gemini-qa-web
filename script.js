@@ -89,26 +89,6 @@ promptInput.addEventListener('keydown', (e) => {
     }
 });
 
-// --- Functions ---
-
-function initializeGenAI(key) {
-    try {
-        genAI = new GoogleGenerativeAI(key);
-        model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" }); // Use a free/efficient model
-    } catch (error) {
-        console.error("Error initializing Gemini:", error);
-        addSystemMessage("Error initializing Gemini API. Please check your key.");
-    }
-}
-
-function toggleModal(show) {
-    if (show) {
-        settingsModal.classList.remove('hidden');
-    } else {
-        settingsModal.classList.add('hidden');
-    }
-}
-
 function addMessage(text, sender) {
     const messageDiv = document.createElement('div');
     messageDiv.classList.add('message', sender);
