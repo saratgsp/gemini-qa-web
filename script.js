@@ -30,9 +30,9 @@ function initializeGenAI(key) {
             throw new Error("GoogleGenerativeAI SDK not loaded properly.");
         }
         genAI = new GoogleGenerativeAI(key);
-        // Use gemini-1.5-flash-latest for the most compatible version
-        model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
-        console.log("GenAI Model initialized (gemini-1.5-flash-latest)");
+        // Upgrading to Gemini 2.0 Flash (Latest available)
+        model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+        console.log("GenAI Model initialized (gemini-2.0-flash)");
     } catch (error) {
         console.error("Error initializing Gemini:", error);
         addSystemMessage("Error initializing Gemini API. " + error.message);
