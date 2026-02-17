@@ -32,12 +32,19 @@ settingsBtn.addEventListener('click', () => toggleModal(true));
 closeModalBtn.addEventListener('click', () => toggleModal(false));
 
 saveKeyBtn.addEventListener('click', () => {
+    console.log("Save Key clicked");
     const key = apiKeyInput.value.trim();
     if (key) {
-        localStorage.setItem('gemini_api_key', key);
-        initializeGenAI(key);
-        toggleModal(false);
-        addSystemMessage("API Key saved! Ready to chat.");
+        try {
+            localStorage.setItem('gemini_api_key', key);
+            initializeGenAI(key);
+            toggleModal(false);
+            addSystemMessage("API Key saved! Ready to chat.");
+            console.log("API Key saved and GenAI initialized");
+        } catch (e) {
+            console.error("Save Key Error:", e);
+            alert("Error saving key: " + e.message);
+        }
     } else {
         alert("Please enter a valid API key.");
     }
