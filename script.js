@@ -17,9 +17,9 @@ let model;
 function toggleModal(show) {
     console.log("toggleModal:", show);
     if (show) {
-        settingsModal.classList.remove('hidden');
+        settingsModal.style.display = 'flex';
     } else {
-        settingsModal.classList.add('hidden');
+        settingsModal.style.display = 'none';
     }
 }
 
@@ -71,7 +71,7 @@ saveKeyBtn.onclick = () => {
             addSystemMessage("API Key saved! Ready to chat.");
         } catch (e) {
             console.error("Failed to save key:", e);
-            alert("Storage error: " + e.message + ". Please ensure cookies/storage are enabled.");
+            alert("Storage error: " + e.message);
         }
     } else {
         alert("Please enter a valid API key.");
