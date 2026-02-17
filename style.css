@@ -48,8 +48,13 @@ body {
 }
 
 @keyframes flow {
-    0% { transform: translate(0, 0); }
-    100% { transform: translate(10%, 10%); }
+    0% {
+        transform: translate(0, 0);
+    }
+
+    100% {
+        transform: translate(10%, 10%);
+    }
 }
 
 .app-container {
@@ -138,8 +143,15 @@ body {
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .message.user {
@@ -164,7 +176,8 @@ body {
 }
 
 .message.ai .message-avatar {
-    background: linear-gradient(135deg, #FF0080 0%, #7928CA 100%); /* Gemini-ish gradient */
+    background: linear-gradient(135deg, #FF0080 0%, #7928CA 100%);
+    /* Gemini-ish gradient */
 }
 
 .message-content {
@@ -175,7 +188,7 @@ body {
     color: var(--text-color);
     font-size: 1rem;
     line-height: 1.6;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .message.user .message-content {
@@ -249,8 +262,14 @@ textarea {
 }
 
 /* Markdown Styles within Message */
-.message-content p { margin-bottom: 0.5rem; }
-.message-content p:last-child { margin-bottom: 0; }
+.message-content p {
+    margin-bottom: 0.5rem;
+}
+
+.message-content p:last-child {
+    margin-bottom: 0;
+}
+
 .message-content code {
     background: rgba(0, 0, 0, 0.3);
     padding: 0.2em 0.4em;
@@ -258,6 +277,7 @@ textarea {
     font-family: monospace;
     font-size: 0.9em;
 }
+
 .message-content pre {
     background: #0d1117;
     padding: 1rem;
@@ -265,13 +285,16 @@ textarea {
     overflow-x: auto;
     margin: 0.5rem 0;
 }
+
 .message-content pre code {
     background: transparent;
     padding: 0;
 }
 
 /* Modal */
-.hidden { display: none; }
+.hidden {
+    display: none !important;
+}
 
 .modal {
     position: fixed;
@@ -299,8 +322,15 @@ textarea {
 }
 
 @keyframes scaleIn {
-    from { transform: scale(0.95); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
+    from {
+        transform: scale(0.95);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 
 .modal-header {
@@ -375,6 +405,7 @@ textarea {
     .app-container {
         border: none;
     }
+
     .message {
         max-width: 95%;
     }

@@ -1,7 +1,5 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-console.log("Script loaded and ESM import successful.");
-
 const chatHistory = document.getElementById('chat-history');
 const promptInput = document.getElementById('prompt-input');
 const sendBtn = document.getElementById('send-btn');
