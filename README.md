@@ -21,19 +21,22 @@ A modern, premium-designed web application that lets you chat with Google Gemini
 
 ## Deployment with Cloudflare Pages (Recommended)
 
-This error usually happens if you chose **"Worker"** instead of **"Pages"**. For a static website like this, please use **Pages**:
+If you see an error about "Missing entry-point", it's likely because you are on the **Workers** tab. This project must be deployed as **Pages**:
 
 1.  **Login to [Cloudflare Dashboard](https://dash.cloudflare.com/)**.
-2.  Go to **Workers & Pages** > **Create** > **Pages** (Not Worker).
-3.  Click **Connect to Git** and select `gemini-qa-web`.
-4.  **Build settings**:
+2.  Click **Workers & Pages** in the sidebar.
+3.  Click the **Create application** button.
+4.  **CRITICAL**: Look at the top of the page. You will see two tabs: **Workers** and **Pages**. 
+    - Click on the **Pages** tab.
+5.  Click **Connect to Git** and select your `gemini-qa-web` repository.
+6.  **Build settings**:
     - **Framework preset**: `None`
-    - **Build command**: (Leave totally empty)
-    - **Build output directory**: `.` (Single dot or leave empty if it shows root)
-5.  Click **Save and Deploy**.
+    - **Build command**: (Leave empty)
+    - **Build output directory**: `.` (Make sure it is just a single dot)
+7.  Click **Save and Deploy**.
 
-> [!TIP]
-> If you still see the error, make sure the **Build output directory** is set to `.` which means the current folder where `index.html` is located.
+> [!IMPORTANT]
+> Make sure you are on the **Pages** tab before clicking "Connect to Git". Workers won't work for this static site.
 
 ## Development
 
