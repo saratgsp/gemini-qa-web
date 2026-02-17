@@ -19,6 +19,21 @@ A modern, premium-designed web application that lets you chat with Google Gemini
     - Click the settings icon (if not prompted automatically) and paste your API Key.
     - Start chatting!
 
+## Deployment with Cloudflare Pages
+
+This website is ready to be hosted on Cloudflare Pages for free:
+
+1.  **Login to [Cloudflare Dashboard](https://dash.cloudflare.com/)**.
+2.  Go to **Workers & Pages** > **Create application** > **Pages** > **Connect to Git**.
+3.  Select your repository `gemini-qa-web`.
+4.  **Build settings**:
+    - **Framework preset**: None
+    - **Build command**: (Leave empty)
+    - **Build output directory**: `/` (or leave as default)
+5.  Click **Save and Deploy**.
+
+Cloudflare will automatically deploy your site every time you push to GitHub!
+
 ## Development
 
 The project is built with vanilla HTML, CSS, and JavaScript. No build step required for simple usage.
