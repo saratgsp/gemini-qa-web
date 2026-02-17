@@ -19,20 +19,21 @@ A modern, premium-designed web application that lets you chat with Google Gemini
     - Click the settings icon (if not prompted automatically) and paste your API Key.
     - Start chatting!
 
-## Deployment with Cloudflare Pages
+## Deployment with Cloudflare Pages (Recommended)
 
-This website is ready to be hosted on Cloudflare Pages for free:
+This error usually happens if you chose **"Worker"** instead of **"Pages"**. For a static website like this, please use **Pages**:
 
 1.  **Login to [Cloudflare Dashboard](https://dash.cloudflare.com/)**.
-2.  Go to **Workers & Pages** > **Create application** > **Pages** > **Connect to Git**.
-3.  Select your repository `gemini-qa-web`.
+2.  Go to **Workers & Pages** > **Create** > **Pages** (Not Worker).
+3.  Click **Connect to Git** and select `gemini-qa-web`.
 4.  **Build settings**:
-    - **Framework preset**: None
-    - **Build command**: (Leave empty)
-    - **Build output directory**: `/` (or leave as default)
+    - **Framework preset**: `None`
+    - **Build command**: (Leave totally empty)
+    - **Build output directory**: `.` (Single dot or leave empty if it shows root)
 5.  Click **Save and Deploy**.
 
-Cloudflare will automatically deploy your site every time you push to GitHub!
+> [!TIP]
+> If you still see the error, make sure the **Build output directory** is set to `.` which means the current folder where `index.html` is located.
 
 ## Development
 

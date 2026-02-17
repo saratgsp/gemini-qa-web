@@ -13,6 +13,11 @@ let genAI;
 let model;
 
 // --- State Management ---
+// Check for file protocol (ES Modules won't work)
+if (window.location.protocol === 'file:') {
+    alert("Warning: This app uses ES Modules which may not work when opened directly as a file. Please use a local server (e.g., Live Server or python -m http.server).");
+}
+
 // Check for API Key on load
 const savedKey = localStorage.getItem('gemini_api_key');
 if (savedKey) {
@@ -32,7 +37,7 @@ saveKeyBtn.addEventListener('click', () => {
         localStorage.setItem('gemini_api_key', key);
         initializeGenAI(key);
         toggleModal(false);
-        addSystemMessage("API Key saved successfully! You can now start chatting.");
+        addSystemMessage("API Key saved! Ready to chat.");
     } else {
         alert("Please enter a valid API key.");
     }
@@ -77,7 +82,7 @@ function addMessage(text, sender) {
 
     const content = document.createElement('div');
     content.classList.add('message-content');
-    
+
     // Parse Markdown for AI messages
     if (sender === 'ai') {
         content.innerHTML = marked.parse(text);
@@ -89,7 +94,7 @@ function addMessage(text, sender) {
     messageDiv.appendChild(content);
 
     chatHistory.appendChild(messageDiv);
-    
+
     // Auto scroll to bottom
     chatHistory.scrollTop = chatHistory.scrollHeight;
 
@@ -132,22 +137,23 @@ async function sendMessage() {
         const result = await model.generateContent(text);
         const response = await result.response;
         const textResponse = response.text();
-        
+
         // Remove loading and add actual response (replace content)
         loadingDiv.classList.remove('loading');
         loadingDiv.innerHTML = marked.parse(textResponse);
-        
+
         // Re-scroll to bottom after rendering markdown
         chatHistory.scrollTop = chatHistory.scrollHeight;
 
     } catch (error) {
         console.error("Gemini Error:", error);
-        loadingDiv.textContent = "Error: " + (error.message || "Failed to get response.");
+        loadingDiv.textContent = "Error: " + (error.message || "Failed to get response. Check console for details.");
+        addSystemMessage("Tip: Make sure your API key is correct and you have an active internet connection.");
     }
 }
 
 // Auto-resize textarea
-promptInput.addEventListener('input', function() {
+promptInput.addEventListener('input', function () {
     this.style.height = 'auto';
     this.style.height = (this.scrollHeight) + 'px';
 });
