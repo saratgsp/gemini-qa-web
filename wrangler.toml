@@ -1,7 +1,4 @@
 #:schema https://util.cloudflareworkers.com/wrangler.schema.json
 name = "gemini-qa-web"
 pages_build_output_dir = "."
-
-[site]
-bucket = "."
-entry-point = "workers-site"
+compatibility_date = "2024-11-01"
